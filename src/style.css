@@ -1,0 +1,4 @@
+#content:only-child() {
+        width: 100%;
+        overflow: auto;
+}
