@@ -1,7 +1,7 @@
 const routes = {
         "/": "/home/pages/home/index.html",
         "/login": "/login/pages/index.html",
-        404: "/routing/notfound.html"
+        404: "/routing/pages/notfound.html"
 }
 
 function changeRoutes(event) {
