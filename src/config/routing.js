@@ -1,6 +1,7 @@
 const routes = {
         "/home": "/pages/home",
         "/login": "/login/pages/index",
+        "/usuarios/": "/pages/usuarios/index",
         404: "/pages/notfound",
         498: "/pages/sessionexpired"
 }

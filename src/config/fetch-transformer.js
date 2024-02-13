@@ -1,17 +1,17 @@
 import { locationHandler } from "./routing"
 
 export class FetchTransformer {
-        routeValue = ""
         method = ""
-        body
+        body = null
+        url = ""
 
-        constructor(targetRoute = "", callMethod, requestBody = null) {
-                this.routeValue = targetRoute
+        constructor(url,callMethod, requestBody = null) {
                 this.method = callMethod
                 this.body = requestBody
+                this.url = url
         }
 
-        async fetch(url) {
+        async fetch() {
                 let responseBody = JSON.stringify(this.body) || this.body
 
                 const tokenResult = () => {
@@ -24,7 +24,7 @@ export class FetchTransformer {
 
                 try {
                         const result = await fetch(
-                                `${url}${this.routeValue}`,
+                                this.url,
                                 {
                                         headers: tokenResult(),
                                         method: this.method,
