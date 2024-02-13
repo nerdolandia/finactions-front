@@ -1,6 +1,7 @@
 const routes = {
         "/home": "/pages/home",
         "/login": "/login/pages/index",
+        "/usuarios": "/pages/usuarios/index",
         404: "/pages/notfound",
         498: "/pages/sessionexpired"
 }
@@ -14,10 +15,9 @@ export async function locationHandler() {
         // }
 
         const locationPath = window.location.pathname
-        console.log(locationPath)
         if (locationPath === "/") {
-                debugger
-                window.location.pathname = "/pages/templates/template-logon"
+                window.location.replace("/pages/templates/template-logon")
+                return
         }
 
         console.log(locationPath)

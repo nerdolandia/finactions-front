@@ -6,19 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="../../assets/bootstrap/bootstrap.min.css">
   <script src="../../assets/bootstrap/bootstrap.bundle.min.js" defer></script>
-  <script src="../../config/routing.js" type="module" async>
-    window.location.pushState({}, "", "/")
-    document.getElementById("sidebar")
-      .querySelectorAll("a")
-      .forEach(x => x.addEventListener("click", changeRoutes))
-
-    function changeRoutes(event) {
-      event.preventDefault()
-      const path = token ? event.target.href : 498
-      window.history.pushState({}, "", path)
-      locationHandler()
-      window.route = changeRoutes
-  </script>
+  <script src="logon.js" type="module" defer></script>
   <title>FinActions.IO</title>
 </head>
 
