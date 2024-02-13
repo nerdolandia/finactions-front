@@ -1,4 +1,5 @@
 const routes = {
+        "template": "pages/templates/template-logon",
         "/home": "/pages/home",
         "/login": "/login/pages/index",
         "/usuarios": "/pages/usuarios/index",
@@ -6,9 +7,9 @@ const routes = {
         498: "/pages/sessionexpired"
 }
 
-const token = sessionStorage.getItem("token")
+const token = sessionStorage.getItem("token") || "implementar lmao"
 
-export async function locationHandler() {
+async function locationHandler() {
         // if (!token) {
         //         window.location.assign("/pages/sessionexpired")
         //         return
@@ -16,21 +17,24 @@ export async function locationHandler() {
 
         const locationPath = window.location.pathname
         if (locationPath === "/") {
-                window.location.replace("/pages/templates/template-logon")
+                await replaceDocument(routes["template"], "validate-replace")
+                window.history.pushState({}, "", "/home")
                 return
         }
 
-        console.log(locationPath)
         if (!routes[locationPath]) {
-                window.location.assign(routes[404])
-                return
+                window.location.replace(routes[404])
         }
 
-        const filePath = token && routes[locationPath]
+        const filePath = routes[locationPath]
+        await replaceDocument(filePath, "content")
+}
+
+async function replaceDocument(filePath, elementId) {
         try {
                 const html = await fetch(filePath)
                 const htmlText = await html.text()
-                document.getElementById("content").innerHTML = htmlText
+                document.getElementById(elementId).innerHTML = htmlText
         } catch (error) {
                 alert(`Erro no carregamento de páginas: ${error}`)
         }

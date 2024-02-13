@@ -1,8 +1,3 @@
-import { locationHandler } from "../../config/routing";
-
-debugger
-
-window.history.replaceState({}, "", "/home")
 document.getElementById("sidebar")
         .querySelectorAll("a")
         .forEach(x => x.addEventListener("click", changeRoutes))
