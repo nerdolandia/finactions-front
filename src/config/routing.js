@@ -16,10 +16,11 @@ async function locationHandler() {
         // }
 
         const locationPath = window.location.pathname
-        if (locationPath === "/") {
+        const templateContent = document.getElementById("content")
+        if (!templateContent) {
                 await replaceDocument(routes["template"], "validate-replace")
                 window.history.pushState({}, "", "/home")
-                return
+                locationPath = window.location.pathname
         }
 
         if (!routes[locationPath]) {
