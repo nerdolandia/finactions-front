@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { verifySession } from '@/lib/config/session'
 import { cookies, headers } from 'next/headers'
+import { STATUS_CODES } from 'http'
+import { forbidden, redirect } from 'next/navigation'
 
 // 1. Specify protected and public routes
 const publicRoutes = ['/login', '/signup']
@@ -30,6 +32,10 @@ export default async function middleware(req: NextRequest) {
 
     const response = NextResponse.next()
 
+    if (response.status == 404) {
+      status
+      return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
+    }
 
     console.log(response.status)
     return response

@@ -43,24 +43,30 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<LoginRequest> = async data => {
     setLoading(true)
 
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
+      if (response.ok) {
+        router.push('/protected')
+      } else {
+        // Handle errors
 
-    if (response.ok) {
-      router.push('/protected')
-    } else {
-      // Handle errors
 
+      }
+    } catch (error) {
+      console.error('Login error:', error)
+      // setError('An unexpected error occurred. Please try again.')
+    } finally {
       setLoading(false)
     }
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="lg">
       <Box sx={{
         marginTop: 8,
         display: 'flex',
