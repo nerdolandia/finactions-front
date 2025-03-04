@@ -16,13 +16,14 @@
 // }
 
 import { FormEvent, FormEventHandler, useState } from 'react'
-import { useRouter } from 'next/router'
 import { Box, Button, CircularProgress, Container, FormControl, TextField, Typography } from '@mui/material'
 import { Fascinate } from 'next/font/google'
 import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import { LoginRequest } from '@/lib/model/loginModel'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z, ZodType } from 'zod'
+import { useAuth } from '@/lib/config/context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 const schema: ZodType<LoginRequest> = z.object({
   userName: z.string().min(1, { message: 'Required' }),
@@ -33,6 +34,7 @@ export default function LoginPage() {
 
 
   const [loading, setLoading] = useState(false)
+  const { setIsAuthenticated } = useAuth()
 
   const router = useRouter()
   const { register, handleSubmit, watch, control, formState: { errors } } = useForm<LoginRequest>({
@@ -51,6 +53,7 @@ export default function LoginPage() {
       })
 
       if (response.ok) {
+        setIsAuthenticated(true)
         router.push('/protected')
       } else {
         // Handle errors

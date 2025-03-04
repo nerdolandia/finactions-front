@@ -1,0 +1,31 @@
+Here's a simple ASCII flowchart for how your ResponsiveDrawer functions:
++-------------------------------------------+
+|         ResponsiveDrawer                  |
++-------------------------+-----------------+
+          | Open prop (boolean)     
+          v
++-------------------------+
+|   MUI <Drawer>         |----> Uses `sx` for width and styling
++-------------------------+
+          |
+          v
++-------------------------+
+|     <Toolbar />         |----> Ensures correct top offset
++-------------------------+
+          |
+          v
++-------------------------+
+|    <Box overflow="auto">|----> Allows scrolling for list items if needed
++-------------------------+
+          |
+          v
++-------------------------+
+|       <List>           |----> Contains the menu items
++-------------------------+
+          |
+          v
++-------------------------------+
+| Multiple <ListItem> elements  |----> Each holding
+| with <ListItemButton>         |      • Icon  (conditionally styled)
+| (routing and styling logic)   |      • Text (shown/hidden based on open)
++-------------------------------+

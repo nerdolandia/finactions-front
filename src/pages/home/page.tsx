@@ -5,7 +5,6 @@ export default function HomePage() {
 
   return (
     <Container maxWidth="lg">
-
     </Container>
   )
 }

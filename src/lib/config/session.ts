@@ -24,7 +24,7 @@ export async function createSession(res: NextApiResponse, data: LoginResponse) {
     sameSite: 'lax',
     path: '/',
   }), serialize('jwt', data.accessToken, {
-    httpOnly: true,
+    httpOnly: false,
     secure: process.env.NODE_ENV === 'production',
     expires: expiresAt,
     sameSite: 'lax',
@@ -37,16 +37,17 @@ export async function createSession(res: NextApiResponse, data: LoginResponse) {
 
 export async function verifySession(req: NextRequest) {
 
+  try {
   //criar validação de token
   
   const sessionString = req.cookies.get('session')?.value
 
   // Verifica se a sessão é uma string válida
-  if (!sessionString) {
+    if (sessionString != undefined && !req.cookies.has('jwt')) {
+    req.cookies.clear()
     return null // Retorna null se não houver sessão
   }
 
-  try {
     // Tenta converter a string JSON em um objeto LoginResponse
     const session: LoginResponse = JSON.parse(sessionString)
 

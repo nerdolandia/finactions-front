@@ -1,33 +1,33 @@
-// components/Menu.tsx
-import { useRouter } from 'next/router'
+
 import { Button } from '@mui/material'
-import { useMenu } from '../context/MenuContext'
+import { useMenu } from '../config/context/MenuContext'
+import { useRouter } from 'next/navigation'
 
 function Menu() {
-  const { selectedRoute, setSelectedRoute } = useMenu()
+  const { selectedRoute,  navigateToRoute} = useMenu()
   const router = useRouter()
 
   const handleRouteChange = (route: string) => {
-    setSelectedRoute(route)
+    navigateToRoute(route)
     router.push(route)
   }
 
   return (
     <nav>
       <Button
-        onClick={() => handleRouteChange('/')}
+        onClick={() => navigateToRoute('/')}
         variant={selectedRoute === '/' ? 'contained' : 'outlined'}
       >
         Home
       </Button>
       <Button
-        onClick={() => handleRouteChange('/about')}
+        onClick={() => navigateToRoute('/about')}
         variant={selectedRoute === '/about' ? 'contained' : 'outlined'}
       >
         About
       </Button>
       <Button
-        onClick={() => handleRouteChange('/contact')}
+        onClick={() => navigateToRoute('/contact')}
         variant={selectedRoute === '/contact' ? 'contained' : 'outlined'}
       >
         Contact

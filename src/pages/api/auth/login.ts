@@ -22,5 +22,5 @@ export default async function handler(
 
 async function login(data: LoginRequest): Promise<LoginResponse> {
   const response = await postData<LoginRequest>('/identity/login', data)
-  return response.json() as Promise<LoginResponse>
+  return await response.json()
 }

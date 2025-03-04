@@ -5,6 +5,12 @@ import { PaletteMode } from '@mui/material'
 const themeUnauthenticated = createTheme({
   palette: {
     mode: 'dark' as PaletteMode,
+    primary: {
+      main: '#3a91ba',
+    },
+    secondary: {
+      main: '#8748e0',
+    },
     // primary: {
     //   main: '#6c757d', // Cor primária diferente para não autenticados
     // },

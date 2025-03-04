@@ -1,4 +1,4 @@
-const API_URL = process.env.API_URL
+const API_URL = process.env.API_URL ?? 'http://localhost:5000/api'
 
 async function fetchData(
   endpoint: string,
@@ -6,15 +6,19 @@ async function fetchData(
   token?: string
 ): Promise<Response> {
 
-  return await fetch(`${API_URL}${endpoint}`, {
+  const timeoutEmMS = 3000
+
+  const response=  await fetch(`${API_URL}${endpoint}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers
     },
+    signal: AbortSignal.timeout(timeoutEmMS)
 
   })
+  return response;
 
   // if (!response.ok) {
   //   

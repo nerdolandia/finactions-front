@@ -1,11 +1,10 @@
 async function fetchLocal(
   endpoint: string,
   options: RequestInit = {},
-  token?: string
 ): Promise<Response> {
 
 
-  return await fetch(`${endpoint}`, {
+  return await fetch(`/api${endpoint}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -25,20 +24,19 @@ async function fetchLocal(
   // return response
 }
 
-export async function getLocal(endpoint: string, token?: string) {
+export async function getLocal(endpoint: string) {
   return fetchLocal(endpoint, {
     method: 'GET',
-  }, token)
+  })
 }
 
 export async function postLocal<U>(
   endpoint: string,
   data: U,
-  token?: string
 ) {
   return fetchLocal(endpoint, {
     method: 'POST',
     body: JSON.stringify(data),
-  }, token)
+  })
 }
 

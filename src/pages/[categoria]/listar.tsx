@@ -1,32 +1,28 @@
-import { CategoriaModel } from "@/lib/model/categoriaModel"
-import { Container } from "@mui/material"
-import { getLocal } from "@/lib/utils/api-local"
-import { useCallback, useEffect, useState } from "react"
-import CategoriaTable from "@/lib/components/CategoriaTable"
+import { Box, Container, Typography } from "@mui/material"
 import CategoriaTableGrid from "@/lib/components/CategoriaTableGrid"
-import { DataGrid, GridSortModel } from "@mui/x-data-grid"
+import { GridColDef } from "@mui/x-data-grid"
+import { CategoriaModel } from "@/lib/model/categoriaModel"
 
 export default function CategoriasPage() {
-  const [categorias, setCategorias] = useState<CategoriaModel[]>([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getLocal('/api/mock/categoria')
-        const data = await response.json()
-        setCategorias(data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
 
-    fetchData()
-  }, []) //
+
+  const columns: GridColDef[] = [
+    { field: 'nome', headerName: 'Nome', flex: 1 },
+    { field: 'dataCriacao', headerName: 'Data de Criação', flex: 1 },
+    { field: 'dataModificacao', headerName: 'Data de Modificação', flex: 1 },
+    { field: 'movimentacoes', headerName: 'Movimentações', flex: 2 },
+  ]
 
   return (
 
     <Container maxWidth="lg">
-      <CategoriaTableGrid  />
+      <Box maxHeight={100}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Lista de Categorias
+        </Typography>
+        <CategoriaTableGrid />
+      </Box>
     </Container>
   )
 }
@@ -41,7 +37,7 @@ export default function CategoriasPage() {
 //     setQueryOptions({ sortModel: [...sortModel] })
 //   }, [])
 
-//   const { isLoading, rows } = 
+//   const { isLoading, rows } =
 
 //   return (
 //     <div style={{ height: 400, width: '100%' }}>

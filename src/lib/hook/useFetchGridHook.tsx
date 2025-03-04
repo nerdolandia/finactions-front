@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { CategoriaModel } from '../model/categoriaModel'
 import { GridSortModel, GridFilterModel } from '@mui/x-data-grid'
+import { getLocal } from '../utils/api-local'
 
-const useFetchGrid = <T,>(endpoint: string, queryOptions: QueryOptions): FetchGridResult<T> => {
+const useFetchGridHook = <T,>(endpoint: string, queryOptions: QueryOptions): FetchGridResult<T> => {
   const [data, setData] = useState<T[]>([])
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -12,7 +13,7 @@ const useFetchGrid = <T,>(endpoint: string, queryOptions: QueryOptions): FetchGr
     const fetchData = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`${endpoint}?page=${queryOptions.page}&pageSize=${queryOptions.pageSize}`)
+        const response = await getLocal(`${endpoint}?page=${queryOptions.page}&pageSize=${queryOptions.pageSize}`)
         const result = await response.json()
         setData(result)
         setTotal(result.legth || 5)
@@ -22,9 +23,9 @@ const useFetchGrid = <T,>(endpoint: string, queryOptions: QueryOptions): FetchGr
         setLoading(false)
       }
     }
-debugger
+
     fetchData()
-  }, [endpoint, queryOptions]);
+  }, [endpoint, queryOptions])
 
   return { data, total, loading, error }
 }
@@ -44,4 +45,4 @@ type FetchGridResult<T> = {
 }
 
 
-export default useFetchGrid
+export default useFetchGridHook

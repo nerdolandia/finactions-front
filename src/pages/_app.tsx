@@ -1,5 +1,6 @@
-import { AuthProvider } from "@/lib/context/AuthContext"
-import AppProvider from "@/lib/providers/AppProvider"
+import Menu from "@/lib/components/Menu"
+import { AuthProvider } from "@/lib/config/context/AuthContext"
+import AppProvider from "@/lib/config/providers/AppProvider"
 import { AppProps } from "next/app"
 
 

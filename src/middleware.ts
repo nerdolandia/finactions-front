@@ -33,7 +33,6 @@ export default async function middleware(req: NextRequest) {
     const response = NextResponse.next()
 
     if (response.status == 404) {
-      status
       return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
     }
 
