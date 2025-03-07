@@ -53,8 +53,13 @@ function Loading() {
 
 
     <Backdrop
-      sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-      open={true}      >
+      sx={(theme) => ({
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        color: '#fff',
+        zIndex: theme.zIndex.drawer + 1,
+      })}
+      open={true}
+    >
       <CircularProgress color="inherit" />
     </Backdrop>
   )
