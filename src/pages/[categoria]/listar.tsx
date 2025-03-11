@@ -2,6 +2,7 @@ import { Box, Container, Typography } from "@mui/material"
 import CategoriaTableGrid from "@/lib/components/CategoriaTableGrid"
 import { GridColDef } from "@mui/x-data-grid"
 import { CategoriaModel } from "@/lib/model/categoriaModel"
+import CrudDynamic from "@/lib/components/shared/CrudDynamic"
 
 export default function CategoriasPage() {
 
@@ -22,6 +23,7 @@ export default function CategoriasPage() {
           Lista de Categorias
         </Typography>
         <CategoriaTableGrid />
+        <CrudDynamic />
       </Box>
     </Container>
   )
